@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Revenue Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+</head>
+<body>
+
+  <h3 style="margin: auto;width: 80%; text-align: center; margin-top: 20px;  text-transform: uppercase">Google Analytics - Customer Revenue Prediction</h3>
+  <h4 style="margin: auto;width: 80%; text-align: center; margin-top: 20px;  text-transform: uppercase">Download the generated predictions below:</h4><br><br>
+<div style="width: 90%; margin: auto; text-align: center">
+    <a href="{{ url_for('send_file', filename=result_file_name)}}">
+      <button class="btn"><i class="fa fa-download"></i>Download</button>
+    </a>
+    <p style="font-style: italic">{{ result_file_name }}</p>
+     <a href="/">Back to Home</a>
+</div>
+</body>
+
+</html>
