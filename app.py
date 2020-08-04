@@ -40,17 +40,21 @@ def predict(fullpath):
        'source_country', 'count_hits_nw_domain', 'sum_hits_nw_domain',
        'count_pvs_nw_domain', 'sum_pvs_nw_domain']
     df = load_df(fullpath)
+    print('[INFO] : Data loaded from uploaded file')
     EXCLUDED_COLS = ['date', 'fullVisitorId', 'visitId', 'visitStartTime', 'totals_transactionRevenue']
     df = process_dfs(df, EXCLUDED_COLS)
     fvid = df[['fullVisitorId']].copy()
     df.drop(EXCLUDED_COLS, axis=1, inplace=True)
     df = df[cols]
+    print('[INFO] : Preprocessed Dataframe')
     result = model.predict(df)
     y_test_vec = np.expm1(np.maximum(0, result))
     submission = submit(y_test_vec, fvid)
+    print('[INFO] : Predictions Generated')
     filename = 'results_'+str(datetime.now().isoformat(timespec='seconds'))+'.csv'
     fullpath = os.path.join(PREDICTION_FOLDER, filename)
     submission.to_csv(fullpath, index=False)
+    print('[INFO] : Saved Results File')
     return filename
 
 # Process file and predict his label
@@ -66,6 +70,7 @@ def upload_file():
         else:
             fullname = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(fullname)
+            print('[INFO] : File Saved. Pushing to prediction pipeline.')
             filename = predict(fullname)
             return render_template('predict.html', result_file_name=filename)
 
