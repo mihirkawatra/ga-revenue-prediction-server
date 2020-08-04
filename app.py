@@ -63,6 +63,7 @@ def upload_file():
     if request.method == 'GET':
         return render_template('index.html')
     else:
+        print('[INFO] : Upload Received')
         file = request.files['image']
         ext = file.filename.split('.')[-1]
         if ext not in ('xlsx', 'csv'):
